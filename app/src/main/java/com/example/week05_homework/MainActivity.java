@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("탁상용 계산기");
 
         text = findViewById(R.id.txt_input);
     }
@@ -53,26 +55,46 @@ public class MainActivity extends AppCompatActivity {
                 text.setText(output+'0');
                 break;
             case R.id.btn_plus:
+                if(text.getText().toString().length()<=0){
+                    Toast.makeText(getApplicationContext(),"숫자를 먼저 입력하시오",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 num = Double.parseDouble(output);
                 mark = '+';
                 text.setText("");
                 break;
             case R.id.btn_minus:
+                if(text.getText().toString().length()<=0){
+                    Toast.makeText(getApplicationContext(),"숫자를 먼저 입력하시오",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 num = Double.parseDouble(output);
                 mark = '-';
                 text.setText("");
                 break;
             case R.id.btn_mul:
+                if(text.getText().toString().length()<=0){
+                    Toast.makeText(getApplicationContext(),"숫자를 먼저 입력하시오",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 num = Double.parseDouble(output);
                 mark = '*';
                 text.setText("");
                 break;
             case R.id.btn_div:
+                if(text.getText().toString().length()<=0){
+                    Toast.makeText(getApplicationContext(),"숫자를 먼저 입력하시오",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 num = Double.parseDouble(output);
                 mark = '/';
                 text.setText("");
                 break;
             case R.id.btn_dot:
+                if(text.getText().toString().length()<=0){
+                    Toast.makeText(getApplicationContext(),"숫자를 먼저 입력하시오",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 text.setText(output+'.');
                 break;
             case R.id.btn_c:
@@ -80,8 +102,26 @@ public class MainActivity extends AppCompatActivity {
                 text.setText("");
                 break;
             case R.id.btn_ok:
-                
+                if(text.getText().toString().length()<=0){
+                    Toast.makeText(getApplicationContext(),"숫자를 마저 입력하시오",Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if(mark=='*'){
+                    num = num*Double.parseDouble(output);
+                }
+                else if(mark=='+'){
+                    num = num+Double.parseDouble(output);
+                }
+                else if(mark=='-'){
+                    num = num-Double.parseDouble(output);
+                }
+                else if(mark=='/'){
+                    num = num/Double.parseDouble(output);
+                }
 
+                text.setText(num.toString());
+                num=0.0;
+                break;
         }
     }
 }
